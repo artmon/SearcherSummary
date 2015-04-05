@@ -71,18 +71,12 @@ namespace SearcherSummary.ViewModels
         {
             StartSearchCommand = new RelayCommand(StartSearch);
             ShowSummariesCommand = new RelayCommand(ShowSummaries);
-            Url = "http://rabota.e1.ru/resume?city_id%5B%5D=994&limit=100";
-            Progress = 0;
+            Url = Configuration.DefaultUrl;
         }
 
         private void StartSearch(object parameter)
         {
-            Progress = 50;
-
             SearchService.Search(parameter as string);
-
-            Thread.Sleep(1000);
-
             Progress = 100;
         }
 
@@ -90,8 +84,7 @@ namespace SearcherSummary.ViewModels
         {
             var resume = SearchService.GetAllResume();
 
-            var dataContext = new ViewModelSummaries();
-            dataContext.Resumes = new ObservableCollection<Resume>(resume);
+            var dataContext = new ViewModelSummaries(new ObservableCollection<Resume>(resume));
             SummariesView.SetDataContext( dataContext);
 
             SummariesView.Show();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SearcherSummary.Helpers;
 using SearcherSummary.Model;
 
 namespace SearcherSummary.Contracts
@@ -13,6 +14,6 @@ namespace SearcherSummary.Contracts
 
         List<Resume> GetAllResume();
 
-        List<Resume> GetAllResumeByFilter(string filter);
+        List<Resume> GetAllResumeByFilter(ResumeSearchParameters filter);
     }
 }

@@ -96,8 +96,7 @@
     <Compile Include="Helpers\HtmlDocumentHelper.cs" />
     <Compile Include="Helpers\ResumeComparer.cs" />
     <Compile Include="Helpers\ResumeHelper.cs" />
-    <Compile Include="Helpers\ResumeMapper.cs" />
-    <Compile Include="Helpers\ResumeParser.cs" />
+    <Compile Include="Helpers\ResumeSearchParameters.cs" />
     <Compile Include="Helpers\ServiceLocatorManagement.cs" />
     <Compile Include="Migrations\201503291441540_InitialCreate.cs" />
     <Compile Include="Migrations\201503291441540_InitialCreate.Designer.cs">
@@ -142,16 +141,22 @@
     <Compile Include="Model\Experience.cs" />
     <Compile Include="Model\GenderTypes.cs" />
     <Compile Include="Model\Person.cs" />
-    <Compile Include="Model\ShortResume.cs" />
     <Compile Include="Model\WorkPlace.cs" />
     <Compile Include="Model\Resume.cs" />
     <Compile Include="ViewModels\ViewModelSummaries.cs" />
+    <Compile Include="Views\Controls\RangeSlider.xaml.cs">
+      <DependentUpon>RangeSlider.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ResumeView.xaml.cs">
       <DependentUpon>ResumeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Summaries.xaml.cs">
       <DependentUpon>Summaries.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Controls\RangeSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -229,7 +234,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

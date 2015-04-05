@@ -14,12 +14,6 @@ namespace SearcherSummary.Model
     /// </summary>
     public class Person : EntityBase<int>
     {
-        //TODO: нужно ли фото? 
-        ///// <summary>
-        ///// Фото
-        ///// </summary>
-        //public Bitmap Photo { get; set; }
-
         /// <summary>
         /// ФИО
         /// </summary>

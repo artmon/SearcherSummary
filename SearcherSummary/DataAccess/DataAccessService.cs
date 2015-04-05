@@ -5,62 +5,84 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SearcherSummary.Contracts;
+using SearcherSummary.Helpers;
 using SearcherSummary.Model;
 
 namespace SearcherSummary.DataAccess
 {
-    public class DataAccessService : IDataAccessService
+    public class DataAccessService : IDataAccessService, IDisposable
     {
+        private SearcherSummaryContext _db;
+
+        public DataAccessService()
+        {
+            _db = new SearcherSummaryContext();
+        }
+
         public void SaveResumes(List<Resume> resumes)
         {
             var idsOnSite = resumes.Select(x => x.IdOnSite).ToList();
 
-            using (var db = new SearcherSummaryContext())
-            {
-                var existsIdsOnSite = db.Resume.Where(r => idsOnSite.Contains(r.IdOnSite)).Select(r => r.IdOnSite);
-                var addResumes = resumes.Where(r => !existsIdsOnSite.Contains(r.IdOnSite)).ToList();
+            var existsIdsOnSite = _db.Resume.Where(r => idsOnSite.Contains(r.IdOnSite)).Select(r => r.IdOnSite);
+            var addResumes = resumes.Where(r => !existsIdsOnSite.Contains(r.IdOnSite)).ToList();
 
-                db.Resume.AddRange(addResumes);
-                db.SaveChanges();
-            }
+            _db.Resume.AddRange(addResumes);
+            _db.SaveChanges();
         }
 
         public List<Resume> GetAllResumes()
         {
-            using (var db = new SearcherSummaryContext())
-            {
-                return db.Resume.Include("Person").ToList();
-            }
+            return _db.Resume.Include("Person").ToList();
         }
 
 
         public void InsertOrUpdateResumes(List<Resume> resumes)
         {
-            using (var db = new SearcherSummaryContext())
+            foreach (var resume in resumes)
             {
-                foreach (var resume in resumes)
-                {
-                    db.Entry(resume).State = resume.Id == 0 ?
-                                  EntityState.Added :
-                                  EntityState.Modified; 
-                }
-
-                db.SaveChanges();
+                _db.Entry(resume).State = resume.Id == 0 ?
+                                EntityState.Added :
+                                EntityState.Modified; 
             }
+
+            _db.SaveChanges();
         }
 
-        public List<Resume> GetAllResumeByFilter(string filter)
+        public List<Resume> GetAllResumeByFilter(ResumeSearchParameters filter)
         {
-            using (var db = new SearcherSummaryContext())
-            {
                 return
-                    db.Resume.Where(
-                        r =>
-                            r.Title != null && r.Title.Contains(filter))
+                    ApplyFilter(filter)
                         .Include("Person")
                         .ToList();
-            }
         }
 
+
+        private IQueryable<Resume> ApplyFilter(ResumeSearchParameters filter)
+        {
+            var result = _db.Resume.AsQueryable();
+
+            if (filter.Header != null)
+            {
+                result = result.Where(r => r.Title != null && r.Title.Contains(filter.Header));
+            }
+
+            if (filter.SalaryLower.HasValue && filter.SalaryLower > 0)
+            {
+                result = result.Where(r => r.Salary.HasValue && r.Salary >= filter.SalaryLower);
+            }
+
+            if (filter.SalaryUpper.HasValue)
+            {
+                result = result.Where(r => !r.Salary.HasValue || r.Salary <= filter.SalaryUpper);
+            }
+
+            return result;
+        }
+
+
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
     }
 }

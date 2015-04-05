@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Garkavyi Artem\documents\visual studio 2013\Projects\SearcherSummary\SearcherSummary\obj\Debug\
+C:\Git\SearcherSummary\SearcherSummary\obj\Debug\
 SearcherSummary
 none
 false
 DEBUG;TRACE
-C:\Users\Garkavyi Artem\documents\visual studio 2013\Projects\SearcherSummary\SearcherSummary\App.xaml
-3540102420
+C:\Git\SearcherSummary\SearcherSummary\App.xaml
+4-1447482812
 
-53-247050047
-25-554007772
-Views\MainWindow.xaml;Views\ResumeView.xaml;Views\Summaries.xaml;
+52-1448485264
+24-1385431027
+Views\Controls\RangeSlider.xaml;Views\MainWindow.xaml;Views\ResumeView.xaml;Views\Summaries.xaml;
 
 False
 

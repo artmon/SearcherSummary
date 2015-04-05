@@ -11,7 +11,6 @@ using SearcherSummary.Contracts;
 using SearcherSummary.DataAccess;
 using SearcherSummary.Helpers;
 using SearcherSummary.Model;
-using WebKit;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 
@@ -19,7 +18,6 @@ namespace SearcherSummary.BusinessLogic
 {
     public class SearchService : ISearchService
     {
-        //TODO добавить логирование и try catch
 
         #region fields
 
@@ -41,7 +39,6 @@ namespace SearcherSummary.BusinessLogic
 
             HtmlDocument tradeHtmlDocument = Helpers.HtmlDocumentHelper.LoadHtmlDocument(uri);
  
-            //TODO: Сделать RegEx
             var indexList = tradeHtmlDocument.DocumentNode.InnerHtml.IndexOf("LIST");
             var indexAccessToken = tradeHtmlDocument.DocumentNode.InnerHtml.IndexOf("ACCESS_TOKEN");
             var tempStr = tradeHtmlDocument.DocumentNode.InnerHtml.Substring(indexList, indexAccessToken - indexList);
@@ -63,7 +60,7 @@ namespace SearcherSummary.BusinessLogic
             return _dataAccessService.GetAllResumes();
         }
 
-        public List<Resume> GetAllResumeByFilter(string filter)
+        public List<Resume> GetAllResumeByFilter(ResumeSearchParameters filter)
         {
             return _dataAccessService.GetAllResumeByFilter(filter);
         }

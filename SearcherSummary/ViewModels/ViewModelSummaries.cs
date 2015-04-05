@@ -27,26 +27,80 @@ namespace SearcherSummary.ViewModels
             }
         }
 
+        private decimal _salaryLower;
+
+        public decimal SalaryLower
+        {
+            get { return _salaryLower; }
+            set
+            {
+                if (_salaryLower != value)
+                {
+                    _salaryLower = value;
+                    RaisePropertyChanged("SalaryLower");
+                }            
+            }
+        }
+
+        private decimal _salaryUpper;
+
+        public decimal SalaryUpper
+        {
+            get { return _salaryUpper; }
+            set
+            {
+                if (_salaryUpper != value)
+                {
+                    _salaryUpper = value;
+                    RaisePropertyChanged("SalaryUpper");
+                }
+            }
+        }
+
+        private decimal _salaryMax;
+
+        public decimal SalaryMax
+        {
+            get { return _salaryMax; }
+            set
+            {
+                if (_salaryMax != value)
+                {
+                    _salaryMax = value;
+                    RaisePropertyChanged("SalaryMax");
+                }
+            }
+        }
+
         public RelayCommand SearchCommand { get; set; }
 
         public ViewModelSummaries()
         {
+            
+        }
+
+        public ViewModelSummaries(ObservableCollection<Resume> resumes)
+        {
+            Resumes = resumes;
+            SalaryUpper = Resumes.Max(r => r.Salary).GetValueOrDefault(0);
+            SalaryMax = SalaryUpper;
+
+            
             SearchCommand = new RelayCommand(Search);
         }
 
 
         private void Search(object parameter)
         {
-            var filter = parameter as string;
+            var filter = new ResumeSearchParameters();
 
-            if (string.IsNullOrWhiteSpace(filter))
-            {
-                return;
-            }
 
-            Resumes = new ObservableCollection<Resume>(SearchService.GetAllResumeByFilter(filter)); 
+            filter.Header = parameter as string;
+
+            filter.SalaryLower = SalaryLower;
+            filter.SalaryUpper = SalaryUpper;
+
+            Resumes = new ObservableCollection<Resume>(SearchService.GetAllResumeByFilter(filter));
         }
-
-
     }
 }
