@@ -1,0 +1,9 @@
+﻿<Window x:Class="SearcherSummary.Views.ResumeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen"
+        Title="Список резюме" Height="720" Width="1280">
+    <Grid>
+        <WebBrowser Name="webBrowser" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
