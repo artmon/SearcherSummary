@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SearcherSummary.Contracts;
-using SearcherSummary.Helpers;
+using SearcherSummary.BusinessLogic.Contracts;
+using SearcherSummary.Infrastructure;
 
 namespace SearcherSummary.ViewModels
 {

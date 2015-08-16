@@ -11,8 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using SearcherSummary.Helpers;
+using SearcherSummary.Common.Helpers;
 using SearcherSummary.Model;
+using SearcherSummary.Model.Model;
 using SearcherSummary.ViewModels;
 
 namespace SearcherSummary.Views

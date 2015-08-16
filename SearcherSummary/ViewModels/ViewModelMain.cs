@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using SearcherSummary.Contracts;
-using SearcherSummary.Helpers;
+using SearcherSummary.Common.Helpers;
 using SearcherSummary.Model;
+using SearcherSummary.Model.Model;
 using SearcherSummary.Views;
 
 namespace SearcherSummary.ViewModels
@@ -79,15 +79,15 @@ namespace SearcherSummary.ViewModels
             BackgroundWorker bw = new BackgroundWorker();
 
             bw.DoWork += (delegate
-                {
-                    SearchService.Search(parameter as string, i => Progress = i);
-                });
+            {
+                SearchService.Search(parameter as string, i => Progress = i);
+            });
 
             bw.RunWorkerCompleted += (delegate
-                {
-                    MessageBox.Show("Собрано!", "Уведомление", MessageBoxButton.OK);
-                    Progress = 0;
-                });
+            {
+                MessageBox.Show("Собрано!", "Уведомление", MessageBoxButton.OK);
+                Progress = 0;
+            });
 
             bw.RunWorkerAsync();
         }
