@@ -1,3 +1,4 @@
+*.suo
 /packages
 /SearcherSummary/obj
 /SearcherSummary/bin

@@ -37,16 +37,18 @@ namespace SearcherSummary.BusinessLogic
         {
             var uri = new Uri(url);
 
-            HtmlDocument tradeHtmlDocument = Helpers.HtmlDocumentHelper.LoadHtmlDocument(uri);
- 
-            var indexList = tradeHtmlDocument.DocumentNode.InnerHtml.IndexOf("LIST");
-            var indexAccessToken = tradeHtmlDocument.DocumentNode.InnerHtml.IndexOf("ACCESS_TOKEN");
-            var tempStr = tradeHtmlDocument.DocumentNode.InnerHtml.Substring(indexList, indexAccessToken - indexList);
+            HtmlDocument htmlDocument = HtmlDocumentHelper.LoadHtmlDocument(uri);
 
-            var indexStart = tempStr.IndexOf('{');
-            var indexEnd = tempStr.LastIndexOf('}');
+            var html = htmlDocument.DocumentNode.InnerHtml;
 
-            string jsonResume = tempStr.Substring(indexStart, indexEnd - indexStart + 1);
+            //Информация о резюме на странице хранится как Json в виде List = {<информация>} 
+            //Достаем строку  "{<информация>}"
+            var indexList = html.IndexOf("LIST");
+            var indexStart = html.IndexOf('{', indexList);
+            var indexEnd = html.IndexOf("};", indexList) + 1;
+            var length = indexEnd - indexStart;
+
+            string jsonResume = html.Substring(indexStart, length);
             dynamic resumesJson = JObject.Parse(jsonResume);
 
             var resumes = _resumeService.ParseResume(resumesJson);

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using SearcherSummary.Contracts;
 using SearcherSummary.Helpers;
 using SearcherSummary.Model;
@@ -34,7 +33,6 @@ namespace SearcherSummary.DataAccess
         {
             return _db.Resume.Include("Person").ToList();
         }
-
 
         public void InsertOrUpdateResumes(List<Resume> resumes)
         {
