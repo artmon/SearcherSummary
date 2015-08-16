@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Git\SearcherSummary\SearcherSummary\obj\Debug\
+C:\Git\SearcherSummaryHTTPS\SearcherSummary\obj\Debug\
 SearcherSummary
 none
 false
 DEBUG;TRACE
-C:\Git\SearcherSummary\SearcherSummary\App.xaml
+C:\Git\SearcherSummaryHTTPS\SearcherSummary\App.xaml
 4-1447482812
 
 56-7403021
-251405407426
+24109881712
 Views\Controls\RangeSlider.xaml;Views\MainWindow.xaml;Views\ResumeView.xaml;Views\Summaries.xaml;
 
 True

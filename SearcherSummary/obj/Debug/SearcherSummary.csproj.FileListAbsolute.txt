@@ -94,3 +94,6 @@ C:\Git\SearcherSummary\SearcherSummary\obj\Debug\SearcherSummary.Properties.Reso
 C:\Git\SearcherSummary\SearcherSummary\obj\Debug\SearcherSummary.csproj.GenerateResource.Cache
 C:\Git\SearcherSummary\SearcherSummary\obj\Debug\SearcherSummary.exe
 C:\Git\SearcherSummary\SearcherSummary\obj\Debug\SearcherSummary.pdb
+C:\Git\SearcherSummaryHTTPS\SearcherSummary\bin\Debug\SearcherSummary.exe.config
+C:\Git\SearcherSummaryHTTPS\SearcherSummary\obj\Debug\SearcherSummary.exe
+C:\Git\SearcherSummaryHTTPS\SearcherSummary\obj\Debug\SearcherSummary.pdb
