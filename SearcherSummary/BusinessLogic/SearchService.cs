@@ -33,11 +33,15 @@ namespace SearcherSummary.BusinessLogic
             _resumeService = resumeService;
         }
 
-        public void Search(string url)
+        public void Search(string url, Action<int> setProgress)
         {
             var uri = new Uri(url);
 
+            setProgress(10);
+
             HtmlDocument htmlDocument = HtmlDocumentHelper.LoadHtmlDocument(uri);
+
+            setProgress(30);
 
             var html = htmlDocument.DocumentNode.InnerHtml;
 
@@ -49,11 +53,17 @@ namespace SearcherSummary.BusinessLogic
             var length = indexEnd - indexStart;
 
             string jsonResume = html.Substring(indexStart, length);
-            dynamic resumesJson = JObject.Parse(jsonResume);
+            var resumesJson = JObject.Parse(jsonResume);
+
+            setProgress(40);
 
             var resumes = _resumeService.ParseResume(resumesJson);
 
+            setProgress(90);
+
             _dataAccessService.SaveResumes(resumes);
+
+            setProgress(100);
         }
 
         

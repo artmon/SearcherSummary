@@ -10,7 +10,7 @@ namespace SearcherSummary.Contracts
 {
     public interface ISearchService
     {
-        void Search(string url);
+        void Search(string url, Action<int> setProgress);
 
         List<Resume> GetAllResume();
 

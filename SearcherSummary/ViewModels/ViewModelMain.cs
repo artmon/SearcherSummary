@@ -76,8 +76,20 @@ namespace SearcherSummary.ViewModels
 
         private void StartSearch(object parameter)
         {
-            SearchService.Search(parameter as string);
-            Progress = 100;
+            BackgroundWorker bw = new BackgroundWorker();
+
+            bw.DoWork += (delegate
+                {
+                    SearchService.Search(parameter as string, i => Progress = i);
+                });
+
+            bw.RunWorkerCompleted += (delegate
+                {
+                    MessageBox.Show("Собрано!", "Уведомление", MessageBoxButton.OK);
+                    Progress = 0;
+                });
+
+            bw.RunWorkerAsync();
         }
 
         private void ShowSummaries(object parameter)
